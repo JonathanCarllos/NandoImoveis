@@ -9,5 +9,6 @@ namespace ApiNandoImoveis.Context
 
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Imovel> Imovels { get; set; }
+        public DbSet<Funcionario> Funcionarios { get; set; }
     }
 }
