@@ -6,6 +6,7 @@ namespace ApiNandoImoveis.Models
     public class Cliente
     {
         // Informações Pessoais
+        [Key]
         public int Id { get; set; }
 
         [StringLength(100), Required(ErrorMessage = "Campo Obrigatório")]
@@ -46,7 +47,9 @@ namespace ApiNandoImoveis.Models
         [Display(Name = "UF")]
         public string? Estado { get; set; }
 
-        [StringLength(10), Required(ErrorMessage = "Campo Obrigatório")]
+        [Required(ErrorMessage = "O CEP é obrigatório.")]
+        [StringLength(8)]
+        [RegularExpression(@"\d{5}-\d{3}", ErrorMessage = "O CEP deve estar no formato XXXXX-XXX.")]
         public string? CEP { get; set; }
 
         [StringLength(50)]
@@ -60,6 +63,7 @@ namespace ApiNandoImoveis.Models
 
         [StringLength(20)]
         [Display(Name = "Telefone")]
+        [DataType(DataType.PhoneNumber)]
         public string? TelefoneResidencial { get; set; } // opcional
 
         [StringLength(50), Required(ErrorMessage = "Campo Obrigatório")]
