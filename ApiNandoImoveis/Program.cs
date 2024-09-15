@@ -1,4 +1,8 @@
 using ApiNandoImoveis.Context;
+using ApiNandoImoveis.Repositories;
+using ApiNandoImoveis.Repositories.Interfaces;
+using ApiNandoImoveis.Services;
+using ApiNandoImoveis.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +19,13 @@ var MySqlConnection = builder.Configuration.GetConnectionString("DefaultConnecti
 builder.Services.AddDbContext<AppDbContext>(options => options.UseMySql(MySqlConnection, ServerVersion.AutoDetect(MySqlConnection)));
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+builder.Services.AddScoped<ICliente, ClienteRepository>();
+builder.Services.AddScoped<IImoveis, ImovelRepository>();
+builder.Services.AddScoped<IFuncionario, FuncionarioRepository>();
+builder.Services.AddScoped<IClienteServices, ClientesServices>();
+builder.Services.AddScoped<IImoveisServices, ImovelServices>();
+builder.Services.AddScoped<IFuncionarioServices,FuncionarioServices>();
 
 var app = builder.Build();
 
